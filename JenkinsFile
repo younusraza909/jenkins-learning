@@ -3,20 +3,26 @@ pipeline{
 
     stages{
         stage("build jar"){
-            script{
-                echo "Building Jar File"
+            steps{
+                script{
+                    echo "Building Jar File"
+                }  
             }
         }
 
         stage("build image"){
-            script{
-                echo "Building Docker Image"
+            steps{
+                script{
+                    echo "Building Docker Image"
+                }  
             }
         }
 
         stage("deploy build"){
-            script{
-                echo "Deploying Build"
+            steps{
+                script{
+                    echo "Deploying  Build"
+                }  
             }
         }
     }
