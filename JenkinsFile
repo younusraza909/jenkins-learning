@@ -12,7 +12,7 @@ pipeline{
         stage("build jar"){
             steps{
                 script{
-                    echo "Building Jar File using $params.VERSION ${parms.VERSION}"
+                    echo "Building Jar File using $params.VERSION ${params.VERSION}"
                     sh "mvn package"
                 }  
             }
