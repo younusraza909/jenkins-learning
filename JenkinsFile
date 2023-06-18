@@ -1,11 +1,19 @@
 pipeline{
+    parameters{
+        choice(name: 'VERSION', choices: ['3.6.3'], description: 'Choose desired maven version')
+    }
     agent any
+
+    tools{
+        maven "maven-${params.VERSION}"
+    }
 
     stages{
         stage("build jar"){
             steps{
                 script{
                     echo "Building Jar File"
+                    sh "mvn package"
                 }  
             }
         }
@@ -13,7 +21,12 @@ pipeline{
         stage("build image"){
             steps{
                 script{
+                 withCredentials([usernamePassword(credentialsId:java , passwordVariable:"PASS" , usernameVariable:"USER")]){
                     echo "Building Docker Image"
+                    sh "docker build -t younusraza909/my-repo:jma2.0"
+                    sh "docker login -u $USER -p $PASS"
+                    sh "docker push younusraza909/my-repo:jma2.0"
+                 }
                 }  
             }
         }
@@ -21,7 +34,7 @@ pipeline{
         stage("deploy build"){
             steps{
                 script{
-                    echo "Deploying  Build"
+                    echo "deploying the application..."
                 }  
             }
         }
