@@ -23,7 +23,7 @@ pipeline{
                 script{
                  withCredentials([usernamePassword(credentialsId:"java" , passwordVariable:"PASS" , usernameVariable:"USER")]){
                     echo "Building Docker Image"
-                    sh "docker build -t younusraza909/my-repo:jma2.0"
+                    sh "docker build -t younusraza909/my-repo:jma2.0 ."
                     sh "docker login -u $USER -p $PASS"
                     sh "docker push younusraza909/my-repo:jma2.0"
                  }
