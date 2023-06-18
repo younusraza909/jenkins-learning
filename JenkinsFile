@@ -5,14 +5,14 @@ pipeline{
     agent any
 
     tools{
-        maven "maven-${params.VERSION}"
+        maven "maven-$params.VERSION"
     }
 
     stages{
         stage("build jar"){
             steps{
                 script{
-                    echo "Building Jar File"
+                    echo "Building Jar File using $params.VERSION ${parms.VERSION}"
                     sh "mvn package"
                 }  
             }
